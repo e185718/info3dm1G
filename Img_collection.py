@@ -6,6 +6,7 @@ from PIL import Image
 import numpy as np
 import glob
 
+
 members = ["櫻井翔"]
 img_dir = "./arasi_deta/downloads/"
 cascade_file = "./haarcascade_frontalface_alt.xml"
