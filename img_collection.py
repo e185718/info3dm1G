@@ -6,7 +6,7 @@ from PIL import Image
 import numpy as np
 import glob
 
-members = ["櫻井翔"]
+members = ["二宮和也"]
 img_dir = "./arasi_deta/downloads/"
 cascade_file = "./haarcascade_frontalface_alt.xml"
 cascade = cv2.CascadeClassifier(cascade_file)
