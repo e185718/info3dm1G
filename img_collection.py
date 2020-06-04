@@ -6,7 +6,7 @@ from PIL import Image
 import numpy as np
 import glob
 
-members = ["二宮和也"]
+members = ["二宮和也", "櫻井翔"]
 img_dir = "./arasi_deta/downloads/"
 cascade_file = "./haarcascade_frontalface_alt.xml"
 cascade = cv2.CascadeClassifier(cascade_file)
@@ -35,3 +35,10 @@ for member in members:
 			os.makedirs(face_path)
 		cv2.imwrite(face_path  + "/" + str(index)+".jpg", img)
 	print("{}のディレクトリにて、{}件中、{}件の写真で顔認識に失敗しました。".format(member, len(files), error_count))
+
+for member in members:
+    pathes = img_dir + member + "/face"
+    files = glob.glob(pathes +'/*')  
+    for i, f in enumerate(files):
+        print(i)
+        os.rename(f, os.path.join(pathes, '{}'.format(i)+ ".jpg"))
