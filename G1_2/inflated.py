@@ -8,7 +8,7 @@ import glob
 import os.path
 
 members = ["二宮和也"]
-img_dir = "./arasi_deta/downloads/"
+img_dir = "./arasi_image/"
 cascade_file = "./haarcascade_frontalface_alt.xml"
 cascade = cv2.CascadeClassifier(cascade_file)
 
