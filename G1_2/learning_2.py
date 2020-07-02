@@ -9,7 +9,7 @@ import time
 from tensorflow.keras.utils import to_categorical
 
 
-members = ["松本潤","二宮和也","相葉雅紀"]
+members = ["松本潤","二宮和也","相葉雅紀","大野智","櫻井翔"]
 nb_members = len(members)
 img_width, img_height = 70, 70
 
