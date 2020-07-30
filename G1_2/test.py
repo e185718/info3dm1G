@@ -7,9 +7,9 @@ from tensorflow.keras import optimizers
 import numpy as np
 import time
 from tensorflow.keras.utils import to_categorical
-members = ["松本潤","二宮和也","相葉雅紀"]
+members = ["松本潤","二宮和也","相葉雅紀","櫻井翔","大野智"]
 nb_members = len(members)
-img_width, img_height = 70, 70
+img_width, img_height = 150, 150
 
 input_tensor = Input(shape=(img_width, img_height, 3))
 vgg16 = VGG16(include_top=False, weights='imagenet', input_tensor=input_tensor)
@@ -23,7 +23,7 @@ top_model.add(Dense(nb_members, activation='softmax'))
 vgg_model = Model(inputs=vgg16.inputs, outputs=top_model(vgg16.outputs))
 
 from tensorflow.keras.models import load_model
-vgg_model.load_weights('./results/Weight.h5')
+vgg_model.load_weights('./results/Weight3.h5')
 
 from tensorflow.keras.preprocessing import image
 import numpy as np
@@ -44,12 +44,14 @@ def img_predict(filename):
     #画像の人物を予測    
 	pred = vgg_model.predict(x)[0]
     #結果を表示する
-	print("'松本潤': 0, '二宮和也': 1, '相葉雅紀': 2")
+	print("'松本潤': 0, '二宮和也': 1, '相葉雅紀': 2, '櫻井翔': 3, '大野智': 4")
 	print(pred*100)
     
-    
+import cv2, os, re,requests, time, bs4
 import glob
 #テスト用の画像が入っているディレクトリのpathを()に入れてください
-test = glob.glob('./test_sample_original/*')
+#test = glob.glob('./test_sample/*')
+test = glob.glob('./test_sample/face/*')
 #数字は各自入力
-img_predict(test[0])
+for index, file in enumerate(test,1):
+	img_predict(file)

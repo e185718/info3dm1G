@@ -9,21 +9,21 @@ import time
 from tensorflow.keras.utils import to_categorical
 
 
-members = ["松本潤","二宮和也","相葉雅紀","大野智","櫻井翔"]
+members = ["松本潤","二宮和也","相葉雅紀","櫻井翔","大野智"]
 nb_members = len(members)
-img_width, img_height = 70, 70
+img_width, img_height = 150, 150
 
 # トレーニング用とバリデーション用の画像格納先
 train_data_dir = './FaceEdited'
-validation_data_dir = './test'
+validation_data_dir = './test2'
 #トレーニングデータ用の画像数
-nb_train_samples = 60
+nb_train_samples = 800
 #バリデーション用の画像数
-nb_validation_samples = 30
+nb_validation_samples = 200
 #バッチサイズ
-batch_size = 30
+batch_size = 32
 #エポック数
-nb_epoch = 20
+nb_epoch = 100
 
 train_datagen = ImageDataGenerator(
   rescale=1.0 / 255,
@@ -63,7 +63,6 @@ from tensorflow.keras.callbacks import EarlyStopping
 
 input_tensor = Input(shape=(img_width, img_height, 3))
 vgg16 = VGG16(include_top=False, weights='imagenet', input_tensor=input_tensor)
-#vgg16 = VGG16(include_top=True, weights='imagenet', input_tensor=None, input_shape=None, pooling=None, classes=1000)
 # VGG16の図の緑色の部分（FC層）の作成
 top_model = Sequential()
 top_model.add(Flatten(input_shape=vgg16.output_shape[1:]))
@@ -97,7 +96,7 @@ if not os.path.exists(result_dir):
     os.mkdir(result_dir)
 
 # 重みを保存
-vgg_model.save_weights(os.path.join(result_dir, 'Weight.h5'))
+vgg_model.save_weights(os.path.join(result_dir, 'Weight3.h5'))
 
 # 作成したモデルを保存
 #vgg_model.save('VGGtake1.h5')
@@ -112,5 +111,5 @@ plt.ylabel("accuracy")
 plt.xlabel("epoch")
 plt.legend(loc="best")
 #Final.pngという名前で、結果を保存
-plt.savefig('Final.png')
+plt.savefig('Final4.png')
 plt.show()

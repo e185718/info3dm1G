@@ -7,10 +7,10 @@ import numpy as np
 import glob
 cascade_file = "./haarcascade_frontalface_alt.xml"
 cascade = cv2.CascadeClassifier(cascade_file)
-img_dir = "./test_sample_original/"
-test = glob.glob('./test_sample_original/*')
+img_dir = "./test_sample/"
+test = glob.glob('./test_sample/*.jpg')
 for index, file in enumerate(test,1):
-	img = cv2.imread(test[1])
+	img = cv2.imread(file)
 	img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 	for i in range(1,20):
 		minValue = i * 5

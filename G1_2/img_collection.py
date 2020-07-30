@@ -5,9 +5,9 @@ from urllib import error,parse
 from PIL import Image
 import numpy as np
 import glob
-
-members = ["松本潤","二宮和也","相葉雅紀","大野智","櫻井翔"]
-img_dir = "./arasi_image/"
+#"二宮和也","櫻井翔","相葉雅紀","大野智","松本潤"
+members = ["二宮和也"]
+img_dir = "./arashi_image/"
 cascade_file = "./haarcascade_frontalface_alt.xml"
 cascade = cv2.CascadeClassifier(cascade_file)
 for member in members:
@@ -19,10 +19,10 @@ for member in members:
 		img_gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 		for i in range(1,20):
 			minValue = i * 5
-			facerect = cascade.detectMultiScal(img_gray, minSize=(minValue,minValue))
-			if len(eyes) == 1:
+			facerect = cascade.detectMultiScale(img_gray, minSize=(minValue,minValue))
+			if len(facerect) == 1:
 				break
-		if len(eyes) != 1:
+		if len(facerect) != 1:
 				continue
 		for x,y,w,h in facerect:
 			img = img[y:y+h, x:x+w]
@@ -30,11 +30,4 @@ for member in members:
 		if not os.path.exists(face_path):
 			os.makedirs(face_path)
 		cv2.imwrite(face_path  + "/" + str(index)+".jpg", img)
-	print("{}のディレクトリにて、{}件中、{}件の写真で顔認識に失敗しました。".format(member, len(files), error_count))
-
-for member in members:
-    pathes = img_dir + member + "/face"
-    files = glob.glob(pathes +'/*')  
-    for i, f in enumerate(files):
-        print(i)
-        os.rename(f, os.path.join(pathes, '{}'.format(i)+ ".jpg"))
+		
